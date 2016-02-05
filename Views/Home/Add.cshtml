@@ -1,0 +1,27 @@
+﻿@model MongoDbSample.Models.UserViewModel
+
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <tr>
+            <td>AD : </td>
+            <td>@Html.TextBoxFor(z => z.Name, new { Class = "input-sm" })</td>
+        </tr>
+        <tr>
+            <td>SOYAD : </td>
+            <td>@Html.TextBoxFor(z => z.Lastname, new { Class = "input-sm" })</td>
+        </tr>
+        <tr>
+            <td>KULLANICI AD : </td>
+            <td>@Html.TextBoxFor(z => z.Username, new { Class = "input-sm" })</td>
+        </tr>
+        <tr>
+            <td>ŞİFRE : </td>
+            <td>@Html.TextBoxFor(z => z.Password, new { Class = "input-sm" })</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button class="btn-sm btn-success" type="submit">Kaydet</button></td>
+        </tr>
+    </table>
+}

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MongoDbSample.Models.User>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>AD</th>
+        <th>SOYAD</th>
+        <th>KULLANICI AD</th>
+        <th>İŞLEM</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Name</td>
+            <td>@item.Lastname</td>
+            <td>@item.Username</td>
+            <td><a class="btn-sm btn-info"  href="/Home/Edit/@item.ID">Düzenle</a> <a class="btn-sm btn-danger" href="/Home/Delete/@item.ID">Sil</a></td>
+        </tr>
+    }
+</table>
