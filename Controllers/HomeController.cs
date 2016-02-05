@@ -40,6 +40,11 @@ namespace MongoDbSample.Controllers
                 });
             }
 
+            if (TempData["OperationResult"] != null)
+	        {
+                ViewBag.Result = TempData["OperationResult"].ToString();
+	        }
+
             return View(userList);
         }
 
@@ -60,6 +65,8 @@ namespace MongoDbSample.Controllers
                 bDoc.Add("Password", user.Password);
 
                 userCollection.InsertOne(bDoc);
+
+                TempData.Add("OperationResult", "Ekleme işlemi tamamladı.");
 
                 return RedirectToAction("Index", "Home");
             }
@@ -112,8 +119,17 @@ namespace MongoDbSample.Controllers
 
         public ActionResult Delete(string id)
         {
-            
-            return View();
+            BsonDocument filter = new BsonDocument();
+            filter.Add("_id", ObjectId.Parse(id));
+
+            DeleteResult dr = userCollection.DeleteOne(filter);
+
+            if (dr.IsAcknowledged)
+                TempData.Add("OperationResult", "Silme işlemi tamamlandı.");
+            else
+                TempData.Add("OperationResult", "Sil işleminde bir hata oluştu.");
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
